@@ -42,11 +42,14 @@ Demostrar cómo un atacante conectado a una red que usa **VTP (VLAN Trunking Pro
 | Parámetro | Valor |
 |:---|:---:|
 | Dominio VTP | `EGALDITO_LAB` |
-| Versión VTP | `2` |
+| Versión VTP | `1` |
 | SW1 Mode | `Server` |
 | SW2 Mode | `Client` |
 
+### Imagen topologia
+![Topología](Topologia/Topologia.png)
 ***
+
 
 ## 🛠️ Herramienta Utilizada: Yersinia
 
@@ -93,18 +96,14 @@ VTP usa un **número de revisión** para sincronizar la base de datos de VLANs. 
 
 ## ▶️ Ejecución
 
-### Modo gráfico (recomendado para el video)
+### Modo interactivo
 ```bash
-sudo yersinia -G
+sudo yersinia -I
 ```
 1. Seleccionar protocolo **VTP**
-2. Click en **Launch Attack**
-3. Seleccionar **"Sending VTP packet"** → tipo **delete all VTP MD5**
-
-### Modo terminal
-```bash
-sudo yersinia vtp -attack 1 -interface eth0
-```
+2. Presionar la **d** para reestablecer el paquete al modo predeterminado
+3. Presionar **x** para ir al menu de launch attack y seleccionar la opcion que necesite. (Opciones: 1,2,3,4)
+4. Cualquiera del las opciones que haya seleccionado solo pondra el ataque en cola, y yersinia espera que envie el ataque utilizando **x** nuevamente continuado con la opcion **0** para enviar el paquete vtp con el ataque
 
 **Verificación en SW1 después del ataque:**
 ```bash
@@ -114,16 +113,6 @@ SW1# show vlan brief
 SW1# show vtp status
 # Configuration Revision: número muy alto (inyectado por Yersinia)
 ```
-
-***
-
-## 📸 Capturas de Pantalla
-
-> 📌 Agregar capturas de:
-> - Yersinia mostrando el ataque VTP en ejecución
-> - `show vlan brief` en SW1 **antes** del ataque (VLANs configuradas)
-> - `show vlan brief` en SW1 **después** del ataque (VLANs eliminadas)
-> - `show vtp status` mostrando el número de revisión alterado
 
 ***
 
@@ -137,12 +126,10 @@ SW1# show vtp status
 | 2 | **Recomendada producción** | VTPv3 + contraseña | Autentica con MD5 mejorado, bloquea revisión |
 | 3 | **Mínima** | `vtp password Cisco123` | Descarta mensajes VTP sin contraseña correcta |
 
-> 💡 **Para el lab:** La opción más rápida y efectiva es `vtp mode transparent` — corta completamente el vector del ataque sin afectar la conectividad del laboratorio.
-
 ***
 
 <div align="center">
 
-**EGALDITO_LAB** -  Ciberseguridad Ofensiva en Redes -  2024
+**EGALDITO_LAB** -  Ciberseguridad Ofensiva en Redes -  2025-0704
 
 </div>
