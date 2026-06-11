@@ -1,0 +1,49 @@
+!!!!!!!!!!! SW1-VTPSERVER (Mitigacion ataque VTP)
+!!!!!!!!!!! Elige UNA de las 3 opciones segun el escenario
+
+en
+conf t
+
+! ============================================
+! OPCION 1 - Cambiar a modo TRANSPARENT
+! SW1 ignora completamente mensajes VTP externos
+! Es la mitigacion mas simple y efectiva
+! ============================================
+
+vtp mode transparent
+
+end
+wr
+
+! ============================================
+! OPCION 2 - Usar VTP version 3 con contrasena
+! VTPv3 tiene MD5 mejorado y proteccion de revision
+! Requiere configurar todos los switches a v3
+! ============================================
+
+vtp version 3
+vtp domain EGALDITO_LAB
+vtp password Cisco123 secret
+vtp mode server
+
+end
+wr
+
+! ============================================
+! OPCION 3 - Resetear el dominio VTP y agregar contrasena
+! Para cuando no puedes cambiar la version pero quieres autenticacion
+! ============================================
+
+vtp domain EGALDITO_LAB
+vtp password Cisco123
+vtp mode server
+
+end
+wr
+
+! Verificacion (aplica para las 3 opciones)
+show vtp status
+show vtp password
+! OPCION 1 debe mostrar: VTP Operating Mode: Transparent
+! OPCION 2 debe mostrar: VTP Version running: 3
+! OPCION 3 debe mostrar: VTP Password configurado
