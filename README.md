@@ -118,7 +118,7 @@ SW1# show vtp status
 
 ## 🛡️ Contramedidas y Mitigación
 
-> 📄 Ver comandos completos en: [`Mitigacion/SW1-VTPSERVER.ios`](Mitigacion/SW1-VTPSERVER.ios)
+> 📄 Ver comandos completos en: [`Mitigacion/SW1.ios`](Mitigacion/SW1.ios)
 
 | # | Opción | Medida | Protección |
 |:---:|:---|:---|:---|
